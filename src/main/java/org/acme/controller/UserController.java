@@ -11,6 +11,8 @@ import org.acme.dto.request.UpdateUserRequest;
 import org.acme.dto.response.UserResponse;
 import org.acme.service.UserService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -37,6 +39,9 @@ public class UserController {
             ),
             @APIResponse(
                     responseCode = "400", description = "Bad Request"
+            ),
+            @APIResponse(
+                    responseCode = "404", description = "Not Found"
             )
     }
     )
@@ -61,6 +66,9 @@ public class UserController {
             ),
             @APIResponse(
                     responseCode = "400", description = "Bad Request"
+            ),
+            @APIResponse(
+                    responseCode = "404", description = "Not Found"
             )
     })
     public Response getUserById(
@@ -86,6 +94,9 @@ public class UserController {
             ),
             @APIResponse(
                     responseCode = "400", description = "Bad Request"
+            ),
+            @APIResponse(
+                    responseCode = "404", description = "Not Found"
             )
     })
     public Response deleteUserById(
@@ -111,6 +122,10 @@ public class UserController {
             ),
             @APIResponse(
                     responseCode = "400", description = "Bad Request"
+            ),
+            @APIResponse(
+                    responseCode = "404", description = "User Not Found",
+                    content = @Content(schema = @Schema(implementation = ApiResponse.class))
             )
     })
     public Response updateUserById(

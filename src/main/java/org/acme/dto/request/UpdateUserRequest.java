@@ -13,11 +13,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 public class UpdateUserRequest {
     @NotBlank(message="username không được để trống")
     @Size(min = 3, max = 50, message ="username phải có từ 3-50 ký tự")
-    @Schema()
+    @Schema(required = true, example = "user", description = "example username")
     private String username;
 
     @Email(message = "Email không hợp lệ")
     @NotBlank(message = "Email không được để trống")
+    @Schema(required = true, example = "example@gmail.com", description = "example email")
     private String email;
 
     private String avatarUrl;
