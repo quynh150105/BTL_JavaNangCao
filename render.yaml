@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: web-xem-firm
+    runtime: docker
+    repo: https://github.com/quynh150105/BTL_JavaNangCao
+    branch: main
+    dockerfilePath: ./Dockerfile
+
+    # Port configuration
+    port: 8080
+
+    # Environment variables
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_USERNAME
+        fromDatabase:
+          name: web-xem-firm-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: web-xem-firm-db
+          property: password
+      - key: DB_URL
+        fromDatabase:
+          name: web-xem-firm-db
+          property: connectionString
+      - key: JWT_ISSUER
+        value: quynh
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: EXTERNAL_API_BASE_URL
+        value: https://ophim1.com
+      - key: JWT_PRIVATE_KEY
+        sync: false
+      - key: JWT_PUBLIC_KEY
+        sync: false
+
+    # Health check
+    healthCheckPath: /health
+
+databases:
+  - name: web-xem-firm-db
+    databaseName: webxemfirm
+    user: webapp
+    region: singapore
+    plan: starter
+
