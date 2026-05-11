@@ -1,10 +1,8 @@
 package org.acme.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -55,7 +53,6 @@ public class Movie extends BaseEntity {
     )
     private List<Country> countries;
 
-    // 🔥 1 movie → nhiều episode
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Episode> episodes;
 }

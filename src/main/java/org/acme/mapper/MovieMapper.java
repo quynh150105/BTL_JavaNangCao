@@ -10,19 +10,19 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "cdi")
 public interface MovieMapper {
-    // ===== LIST =====
     @Mapping(target = "categories", source = "categories")
     @Mapping(target = "countries", source = "countries")
     MovieResponse toResponse(Movie movie);
 
     List<MovieResponse> toResponseList(List<Movie> movies);
 
-    // ===== DETAIL =====
+    @Mapping(target = "episodes", source = "episodes")
     MovieDetailResponse toDetail(Movie movie);
 
     List<CategoryDTO> toCategoryDTO(List<Category> categories);
     List<CountryDTO> toCountryDTO(List<Country> countries);
 
+    @Mapping(target = "serverData", source = "serverData")
     EpisodeResponse toEpisodeResponse(Episode episode);
     List<EpisodeResponse> toEpisodeResponseList(List<Episode> episodes);
 
@@ -32,7 +32,6 @@ public interface MovieMapper {
     CategoryDTO map(Category category);
     CountryDTO map(Country country);
 
-    // ===== CUSTOM =====
     default List<String> mapCategoryNames(List<Category> list) {
         if (list == null) return List.of();
         return list.stream().map(Category::getName).collect(Collectors.toList());
